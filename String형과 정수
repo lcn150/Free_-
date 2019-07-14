@@ -1,0 +1,24 @@
+package leech;
+
+class TV {
+	String name;
+	int year;
+	int inch;
+
+	TV(String n, int y, int i) {  //생성자
+		name = n;
+		year = y;
+		inch = i;
+	}
+
+	void show() {  
+		System.out.println(name + "에서 만든 " + year + "년 형 " + inch + "인치 TV");
+	}
+}
+
+public class TVEx {
+	public static void main(String[] args) {
+		TV myTV = new TV("LG", 2017, 32);  //string과 정수
+		myTV.show();
+	}
+}
