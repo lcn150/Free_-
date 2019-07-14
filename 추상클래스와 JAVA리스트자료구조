@@ -1,0 +1,54 @@
+package leech;
+
+//추상클래스를 이용한 리스트(자료구조)
+abstract class Shape{  
+	//추상메소드를 가진 경우 객체를 만들지 못함 -> 추상클래스
+	public Shape next; //래퍼런스변수(C의 포인터 역할)
+	
+	public Shape() {  
+		next = null;//초기화  (초기에는 null)
+	}
+	abstract public void draw();
+}
+class Line extends Shape{
+	public void draw() {
+		System.out.println("Line");
+	}
+}
+class Rect extends Shape{
+	public void draw() {
+		System.out.println("Rect");
+	}
+}
+class Circle extends Shape{
+	public void draw() {
+		System.out.println("Circle");
+	}
+}
+public class Method {
+	public static void main(String[] args) {
+		Shape start, last, obj; //main에서 사용할 래퍼런스변수
+		
+	    start = new Line();  //Line 생성(위치는 start)
+	    last = start;        //last는 Line을 가리킴
+	    
+ 	    obj = new Rect();    //Rect 생성
+	    start.next = obj;    //Line과 Rect 연결
+	    last = obj;          //last는 Rect 가리킴
+	    
+	    obj = new Line();   //Line생성
+	    last.next = obj;   //Rect와 새로탄생한 Line 연결
+	    last = obj;         //last는 Line가리킴
+	    
+	    obj = new Circle();   //Circle생성
+	    last.next = obj;      //Line이 Circle 연결
+	    last = obj;          //last는 Circle를 가리킴
+	    
+	    Shape p = start;    //start를 가리키는 p포인터
+	    while(p!=null) {   //선-> 사각형->선->원
+	    	p.draw();      //출력 후
+	    	p = p.next;     //다음의 객체 가리킴
+	    }
+	    
+	}
+}
