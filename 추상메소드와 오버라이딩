@@ -1,0 +1,30 @@
+package leech;
+
+abstract class Shape{  //추상메소드를 가진 경우 new로 객체를 만들지 못함 -> 추상클래스
+	abstract public void draw();//추상메소드, 메소드 내부에 구현된 코드가 없는 메소드
+}
+class Line extends Shape{
+	public void draw() {   //오버라이딩, 업캐스팅되었을 때 부모클래스의 것은 실행 안 됨
+		System.out.println("Line");
+	}
+}
+class Rect extends Shape{
+	public void draw() {   //오버라이딩, 업캐스팅되었을 때 부모클래스의 것은 실행 안 됨
+		System.out.println("Rect");
+	}
+}
+class Circle extends Shape{
+	public void draw() {   //오버라이딩, 업캐스팅되었을 때 부모클래스의 것은 실행 안 됨
+		System.out.println("Circle");
+	}
+}
+public class Method {
+	public static void main(String[] args) {
+		Shape p;  //부모형식의 래퍼런스, 추상클래스는 객체를 생성하지못함, 래퍼런스변수는 선언가능
+ 	    p = new Line(); //업캐스팅
+ 	    p.draw();    //Shape클래스의 메소드는 실행안됨, 오버라이딩
+ 	    p = new Circle();  //업캐스팅
+ 	    p.draw();
+ 	    
+	}
+}
