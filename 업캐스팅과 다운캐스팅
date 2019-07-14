@@ -1,0 +1,38 @@
+package leech;
+
+class Person{
+	String name;
+	String id;
+	
+	public Person(String name) {
+		this.name = name;
+	}
+}
+class Student extends Person{
+	String grade;
+	String department;
+	
+	public Student(String name) {
+		super(name);
+	}
+}
+public class UpcastingEx {
+	public static void main(String[] args) {
+		Person p; //래퍼런스변수
+		Student s = new Student("이재문");
+		p = s; //업캐스팅, 묵시적으로 슈퍼클래스 타입인 Person으로 형변환, 묵시적으로 형변환
+		//Student(자식) -> Person(부모) 형변환 필요없음
+		System.out.println(p.name);
+		
+		Person pp = new Student("이충헌");   //업캐스팅
+	    Student ss = (Student)pp;   //다운캐스팅, 묵시적형변환 불가, 명시적형변환할것!!
+ 	    //Person(부모) -> Student(자식) 명시적형변환 필요
+	    System.out.println(ss.name);  
+	    ss.grade ="a";
+	    
+ 	    if(p instanceof Person)  //p가 Person의 인스턴스이면
+ 	    	System.out.println("Person class");
+ 	    if(ss instanceof Person)  //다운캐스팅으로 ss는 Person의 인스턴스이다.
+ 	    	System.out.println("Person class");
+	}
+}
