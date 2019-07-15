@@ -3,7 +3,7 @@ package leech;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-//swing을 이용한 자바 이벤트클래스
+//swing을 이용한 자바 GUI
 public class IndepClassListener extends JFrame{
 	public IndepClassListener() {
 		setTitle("Action 이벤트 리스너 예제");  //프로그램의 제목
