@@ -1,0 +1,45 @@
+package leech;
+
+import java.awt.*;
+import javax.swing.*;
+//쓰레드를 활용한 타이머 예제
+class TimerThread extends Thread{
+	private JLabel timerLabel;
+	public TimerThread(JLabel timerLabel) {
+		this.timerLabel = timerLabel;
+	}
+	public void run() {  //오버라이딩
+		int n =0;
+		while(true) {
+			timerLabel.setText(Integer.toString(n));
+			n++;
+			try {  //예외처리, 쓰레드 처리를 하는 도중 sleep하는 과정은 오류발생할 수 있음
+				Thread.sleep(1000);
+			}
+			catch(InterruptedException e){ //예외 발생시 프로그램 안전하게 종료시킴
+				return;
+			}
+		}
+	}
+}
+public class ThreadTimerEx extends JFrame{
+	public ThreadTimerEx() {
+		setTitle("Thread를 상속받은 타이머 스레드 예제");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		Container c = getContentPane();
+		c.setLayout(new FlowLayout());
+		
+		JLabel timerLabel = new JLabel();
+		timerLabel.setFont(new Font("Gothic", Font.ITALIC, 80));  //타이머의 형식
+		c.add(timerLabel);  // 타이머 생성
+		
+		TimerThread th = new TimerThread(timerLabel);
+		
+		setSize(400, 300);
+		setVisible(true);
+		th.start();   //타이머시작
+	}
+	public static void main(String[] args) {
+		new ThreadTimerEx();
+	}
+}
