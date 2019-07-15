@@ -1,0 +1,36 @@
+package leech;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+//swing을 이용한 자바 이벤트클래스
+public class IndepClassListener extends JFrame{
+	public IndepClassListener() {
+		setTitle("Action 이벤트 리스너 예제");  //프로그램의 제목
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		Container c = getContentPane();  //창을 만들어주는 객체
+		c.setLayout(new FlowLayout());
+		
+		JButton btn = new JButton("Action");  //버튼 객체 생성
+		btn.addActionListener(new MyActionListener());   //버튼은 클릭할 수 있다.
+		c.add(btn);  //버튼 1개 생성
+		
+		setSize(350, 150);  //크기 조정
+		setVisible(true);
+		
+	}
+	public static void main(String[] args) {
+		new IndepClassListener();
+	}
+}
+class MyActionListener implements ActionListener{
+	public void actionPerformed(ActionEvent e) {  //버튼 클릭했을 때 액션
+		JButton b = (JButton)e.getSource();  //버튼 객제 생성
+		if(b.getText().equals("Action"))
+		   b.setText("액션");
+		else {
+			b.setText("Action");
+		}
+		
+	}
+}
