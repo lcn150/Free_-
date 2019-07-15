@@ -1,0 +1,51 @@
+package leech;
+
+import java.util.Iterator;
+import java.util.Vector;
+
+class Point{
+	private int x, y;
+	public Point(int x, int y) {
+		this.x =x;
+		this.y =y;
+	}
+	public String toString() {
+		return "(" + x + "," + y + ")";
+	}
+}
+public class VectorEx {
+	public static void main(String[] args) {
+		Vector<Point> p = new Vector<Point>(2,3); //초기
+		p.add(new Point(10, 20));    //0번지 객체생성
+		p.add(new Point(100, 200));  //1번지  객체생성
+		for(int i=0; i<p.size(); i++) {
+			Point y =p.get(i);
+			System.out.println(y);   //0번지, 1번지 출력
+		}
+		p.remove(0);  //0번지 삭제
+		
+		for(int i=0; i<p.size(); i++) {
+			Point y =p.get(i);
+			System.out.println(y);  //0번지 삭제된 채로 출력
+		}
+		System.out.println();
+		
+		Vector<Integer> v = new Vector<Integer>(); //배열생성
+		v.add(5);  //5
+		v.add(4);  //5 4
+		v.add(-1); //5 4 -1
+		v.add(2, 100);  //2번 인덱스에 100을 넣음(-1은 밀려남)   5  4  100 -1
+		
+		for(int i=0; i<v.size(); i++) {
+			int x = v.get(i);
+			System.out.println(x);
+		}
+		int sum = 0;
+		Iterator<Integer> it = v.iterator();  //반복자iterator를 이용
+		while(it.hasNext()) {  //반복자의 다음이 있다면
+			int n = it.next(); //반복자로 다음을 가리키는 방법
+			sum += n;
+		}
+		System.out.println("백터의 합: "+sum);     //108출력
+	}
+}
