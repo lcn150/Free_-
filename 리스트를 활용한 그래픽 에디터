@@ -1,0 +1,117 @@
+package leech;
+
+import java.util.Scanner;
+//그래픽 에디터
+abstract class Shape{  //추상메소드를 가진 경우 new로 객체를 만들지 못함 -> 추상클래스
+	public Shape next; //래퍼런스변수(포인터)
+	public Shape() {  
+		next = null;//초기화
+	}
+	abstract public void draw();  //추상메소드(자식클래스가 정의해야함)
+	public void setNext(Shape obj) {  //포인터set
+		next = obj;
+	}
+	public Shape getNext() {    //포인터get
+		return next;
+	}
+}
+class Line extends Shape{   //Line 생성
+	public void draw() {
+		System.out.println("Line");
+	}
+}
+class Rect extends Shape{    //Rect생성
+	public void draw() {
+		System.out.println("Rect");
+           
+	}
+}
+class Circle extends Shape{   //Circle 생성
+	public void draw() {
+		System.out.println("Circle");
+	}
+}
+class Editor{
+	public void editor() {
+		final int MAX =100;   //최대 크기100
+		Shape store[] = new Shape[MAX];  //Shape형 배열store 생성
+		
+		int last =0;  //마지막에 선언한 도형이있는 위치이자 "도형의 개수"
+		int ch =1;      //1~4
+		int num, num2; //값을 저장받는 변수
+		while(ch!=4) {
+			System.out.print("삽입(1), 삭제(2), 모두보기(3), 종료(4)>>");
+			Scanner input1 =new Scanner(System.in);
+			ch = input1.nextInt();
+			
+			switch(ch) {
+			case 1:     //삽입할 경우
+				System.out.print("Line(1), Rect(2), Circle(3)>>");
+				Scanner first = new Scanner(System.in);
+				num = first.nextInt();
+				 if(num == 1){
+				        store[last] = new Line(); //Line 도형을 넣는다.
+				        last++;    //배열의 크기 +1
+				 }
+				 else if(num == 2){
+				        store[last] = new Rect();  //Rect 도형을 넣는다.
+				        last++;    //배열의 크기 +1
+				 }
+				 else if(num == 3){
+				        store[last] = new Circle(); //Circle 도형을 넣는다.
+				        last++;    //배열의 크기 +1
+				 }
+				 else{
+				       System.out.print("1 ~ 3 중에서 선택하시오.");
+				 } 
+				 break;
+				 
+			case 2:  //삭제
+				if(last != 0){      //도형의 수가 0이 아니면
+				     System.out.print("삭제할 도형의 위치>>");
+				     Scanner second = new Scanner(System.in);
+				     num2 = second.nextInt();
+				     if(num2 <= last){//입력받은 삭제할 도형의 위치가 도형의 수보다 낮으면
+				             for(int i=num2-1; i<last; i++){
+				             store[i] = store[i+1];
+				             }
+				             last--;    //도형의 수 1개 줄임
+				    }
+				    else{//입력받은 삭제할 도형의 위치가 도형의 수보다 높으면
+				            System.out.println("삭제할 수 없습니다.");
+				    }
+			     }
+			     else{//도형의 수가 0이면
+				      System.out.println("삭제할 도형이 없습니다.");
+				 }
+				 break;
+				    
+			case 3:      //모두 보기
+			    if(last != 0){    //도형의 수가 0이 아니면
+			         for(int i=0; i<last; i++){   //저장한 각 도형의 draw함수를 실행시켜 모두 출력 
+			         store[i].draw();    //모두 보여줘라
+			         }
+			    }
+			    else{//도형의 수가 0이면
+			          System.out.println("출력할 도형이 없습니다.");
+			    }
+			    break;
+			    
+			case 4://끝내기(while문의 반복 조건이 변수 loop가 4가 아닐 때이므로 종료)
+			        System.out.println("beauty를 종료합니다.");
+			        break;
+			   
+			default://오류처리
+			       System.out.println("1 ~ 4 중에서 선택하시오.");
+			       continue;//다시 while문 처음으로
+			}
+		}
+	}
+}
+public class Method {
+	public static void main(String[] args) {
+		System.out.println("그래픽 에디터 beauty를 실행합니다.");
+		Editor edit = new Editor();    //editor 객체 생성
+		edit.editor();     //editor 시작
+	}
+}
